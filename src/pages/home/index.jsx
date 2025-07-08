@@ -1,5 +1,6 @@
 import { useRef, useState } from "react" // Importa o hook useRef do React para manipular elementos da DOM
 import {v4} from 'uuid'
+import { AddButton, Container, input, Product, TrashButton} from './styles' //Componentes styled do arquivo styles.jsx
 
 function Home() {
   const [produtos, setProdutos] = useState([]) //produto (variavel que armazena), setProdutos (função que atualiza o estado),useState([]) valor inicial zero 
@@ -20,18 +21,18 @@ function Home() {
   }
 
   return ( // Retorna o JSX (estrutura do componente)
-    <div>
-      <h1>Lista de Compras</h1>
+    <Container>
+      <h1 className="roboto">Lista de Compras</h1>
       {<input placeholder="produto..." ref={inputRef}/>/*Input que recebe a referência, conecta a referência ao input. */}
-      <button onClick={cliqueiNoBotao}>Adicionar</button>
+      {<AddButton onClick={cliqueiNoBotao}>Adicionar</AddButton> /*Componentes styled  */}
 
       {produtos.map((produto) =>( //Pegue o array produtos (sua lista de compras), para cada produto nessa lista:  
-        <div key={produto.id}>
+        <Product key={produto.id}>
           <p>{produto.nome}</p>
-          <button onClick={()=>deletarProduto(produto.id)}>🗑️</button>
-        </div> //transforme em uma <div> com o nome do produto dentro
+          <TrashButton onClick={()=>deletarProduto(produto.id)}>🗑️</TrashButton>
+        </Product> //transforme em uma <div> com o nome do produto dentro
       ))}
-    </div>
+    </Container>
   )
 }
 
